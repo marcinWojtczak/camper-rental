@@ -1,10 +1,17 @@
-import React from 'react'
-
+import React from 'react';
+import About from './pages/About'
+import Home from './pages/Home';
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
   return (
-    <h1>Camper Rental</h1>
+    <Routes>
+      <Route path='/' element={<Home />}/>
+      <Route path='/about' element={<About />}/>
+    </Routes>
   );
 }
+
+
 
 export default App;

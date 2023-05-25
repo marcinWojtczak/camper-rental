@@ -8,6 +8,9 @@ const Header = () => {
       <nav className='p-4 flex justify-between'>
         <ul className='flex justify-center items-center gap-8'>
           <li>
+            <Link to='/host' className='text-2xl font-semibold'>Host</Link>
+          </li>
+          <li>
             <Link to='/about' className='text-2xl font-semibold'>About</Link>
           </li>
           <li>

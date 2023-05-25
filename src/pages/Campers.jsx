@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Campers = () => {
 
   const [campers, setCampers] = useState([])
-  console.log(campers)
+  
 
   const btnColor = campers.map(camper => { 
     if(camper.type === 'simple') {
@@ -31,7 +31,7 @@ const Campers = () => {
           <h3 className='font-bold'>{camper.name}</h3>
           <p className='font-bold'>{camper.price}<span>/day</span></p>
         </div>
-        <i className={`p-4 text-white font-bold tracking-wide text-center rounded-xl ${btnColor[index]}`}>{camper.type}</i>
+        <i className={`p-4 text-white font-bold tracking-wide text-center rounded-lg ${btnColor[index]}`}>{camper.type}</i>
       </div>
     </Link>
   ))
@@ -39,7 +39,7 @@ const Campers = () => {
   return (
     <div className='p-4 md:p-16 flex flex-col gap-8'>
       <h1 className='font-bold'>Explore our van options</h1>
-      <div className='sm:grid grid-cols-2 gap-8'>
+      <div className='flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-12'>
         {camperElements}
       </div>
     </div>

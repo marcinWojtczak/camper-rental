@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const Home = () => {
   return (
-    <section className='flex flex-col gap-4'>
+    <section className='flex flex-col gap-4 '>
       <div style={{backgroundImage: `url(${HomeImg})`}} className='min-h-[550px] md:min-h-[750px]  bg-center bg-cover flex flex-col justify-center items-center'>
         <div className='w-[90%] md:w-[70%] flex flex-col gap-4 '>
           <h1 className='p-4 text-[56px] tracking-wide leading-tight font-extrabold text-[white] '>Explore the Great Outdoors with Our Premium Camper Rentals</h1>

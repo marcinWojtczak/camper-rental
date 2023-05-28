@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 
 const Campers = () => {
-
+  
   const [campers, setCampers] = useState([])
   
 
@@ -31,7 +31,7 @@ const Campers = () => {
           <h3 className='font-bold'>{camper.name}</h3>
           <p className='font-bold'>{camper.price}<span>/day</span></p>
         </div>
-        <i className={`p-4 text-white font-bold tracking-wide text-center rounded-lg ${btnColor[index]}`}>{camper.type}</i>
+        <p className={`p-4 text-white font-bold tracking-wide text-center rounded-lg ${btnColor[index]}`}><em>{camper.type}</em></p>
       </div>
     </Link>
   ))

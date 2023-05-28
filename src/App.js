@@ -4,6 +4,8 @@ import About from './pages/About'
 import Dashboard from './pages/Host/Dashboard';
 import Income from './pages/Host/Income';
 import Reviews from './pages/Host/Reviews';
+import HostCampers from './pages/Host/HostCampers';
+import HostCamperDetail from './pages/Host/HostCamperDetail';
 import Campers from './pages/Campers';
 import CamperDetail from './pages/CamperDetail';
 import Layout from './components/Layout';
@@ -15,15 +17,22 @@ import "./server"
 function App() {
   return (
     <Routes>
-      <Route element={<Layout/>}>
+      <Route path='/' element={<Layout/>}>
         <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/campers' element={<Campers />} />
-        <Route path='/campers/:id' element={<CamperDetail />} />
-        <Route path='/host' element={<HostLayout />} >
-          <Route path='/host' element={<Dashboard />} />
-          <Route path='/host/income' element={<Income />} />
-          <Route path='/host/reviews' element={<Reviews />} />
+        <Route path='about' element={<About />} />
+        <Route path='campers' element={<Campers />} />
+        <Route path='campers/:id' element={<CamperDetail />} />
+        <Route path='host' element={<HostLayout />} >
+          <Route index element={<Dashboard />} />
+          <Route path='campers' element={<HostCampers />} />
+        
+             {/* <Route path='details' element={<CamperDetail />}/>
+            <Route path='pricing' element={<CaperPricing />}/>
+            <Route path='photos' element={<CamperPhotos />}/> */}
+        
+          <Route path='campers/:id' element={<HostCamperDetail />} />
+          <Route path='income' element={<Income />} />
+          <Route path='reviews' element={<Reviews />} />
         </Route >
       </Route>
     </Routes>

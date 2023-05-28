@@ -1,20 +1,44 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const Header = () => {
+
+  const baseStyle = {
+    fontSize: '18px', 
+    fontWeight: '500',
+  }
+
+  const activeStyle = {
+    fontWeight: 'bold',
+    color: 'red',
+    textDecoration: 'underline',
+    fontSize: '18px'
+  }
   return (
     <header className='flex flex-col sm:flex-row justify-between items-center p-4'>
-      <Link to='/' className='font-semibold tracking-wide text-3xl'>CamperventureRental</Link>
+      <NavLink to='/' className='font-semibold tracking-wide text-3xl'>CamperventureRental</NavLink>
       <nav className='p-4 flex justify-between'>
         <ul className='flex justify-center items-center gap-8'>
           <li>
-            <Link to='/host' className='text-2xl font-semibold'>Host</Link>
+            <NavLink 
+              to='/host' 
+              style={({isActive}) => isActive ? activeStyle : baseStyle}
+            >Host
+            </NavLink>
           </li>
           <li>
-            <Link to='/about' className='text-2xl font-semibold'>About</Link>
+            <NavLink 
+              to='/about'
+              style={({isActive}) => isActive ? activeStyle : baseStyle} 
+            >About
+            </NavLink>
           </li>
           <li>
-            <Link to='/campers' className='text-2xl font-semibold'>Campers</Link>
+            <NavLink 
+              to='/campers' 
+              style={({isActive}) => isActive ? activeStyle : baseStyle}
+            >Campers
+            </NavLink>
           </li>
         </ul>
       </nav>

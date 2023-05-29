@@ -80,7 +80,7 @@ const HostCamperDetail = () => {
             </NavLink>
         </ul>
         </nav>
-        <Outlet />
+        <Outlet context={[currentCamper]}/>
       </div>
     </div>
   )

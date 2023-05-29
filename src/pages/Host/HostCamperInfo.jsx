@@ -1,13 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { useOutletContext } from 'react-router-dom'
 
 const HostCamperInfo = () => {
+  const [ currentCamper] = useOutletContext();
   return (
-    <div className='flex flex-col'>
-      <p className='font-bold'>Name:</p>
-      <p className='font-bold'>Category:</p>
-      <p className='font-bold'>Description:</p>
-      <p className='font-bold'>Visibility:</p>
-    </div>
+    <section className='flex flex-col gap-2'>
+      <p><span className='font-bold'>Name: </span>{currentCamper.name}</p>
+      <p><span className='font-bold'>Category: </span>{currentCamper.type}</p>
+      <p><span className='font-bold'>Description: </span>{currentCamper.description}</p>
+      <p><span className='font-bold'>Visibility: </span>public</p>
+    </section>
   )
 }
 

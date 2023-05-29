@@ -1,8 +1,11 @@
 import React from 'react'
+import { useOutletContext } from 'react-router-dom'
 
 const HostCamperPhotos = () => {
+
+  const [currentCamper] = useOutletContext()
   return (
-    <h1>HostCamperPhotos</h1>
+    <img src={currentCamper.imageUrl} alt='camper img'/>
   )
 }
 

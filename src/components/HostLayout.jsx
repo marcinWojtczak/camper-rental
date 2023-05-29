@@ -21,29 +21,29 @@ const HostLayout = () => {
         <ul className='flex justify-center items-center gap-4 sm:gap-8  '>
           <li>
             <NavLink 
-              to='/host' 
+              to='.' 
               end
-              style={({isActive}) => isActive ? activeStyle : baseStyle}
+              style={({ isActive }) => isActive ? activeStyle : baseStyle}
             >Dashboard
             </NavLink>
           </li>
           <li>
             <NavLink 
-              to='/host/income' 
-              style={({isActive}) => isActive ? activeStyle : baseStyle}
+              to='income' 
+              style={({ isActive }) => isActive ? activeStyle : baseStyle}
             >Income
             </NavLink>
           </li>
           <li>
             <NavLink 
-              to='/host/campers'
-              style={({isActive}) => isActive ? activeStyle : baseStyle}
+              to='campers'
+              style={({ isActive }) => isActive ? activeStyle : baseStyle}
             >Campers
             </NavLink>
           </li>
           <li>
             <NavLink 
-              to='/host/reviews'
+              to='reviews'
               style={({isActive}) => isActive ? activeStyle : baseStyle}
             >Reviews
             </NavLink>

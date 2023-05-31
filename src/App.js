@@ -13,6 +13,7 @@ import Campers from './pages/Campers';
 import CamperDetail from './pages/CamperDetail';
 import Layout from './components/Layout';
 import HostLayout from './components/HostLayout';
+import NotFound from './components/NotFound';
 import { Routes, Route } from 'react-router-dom';
 
 import "./server"
@@ -35,8 +36,8 @@ function App() {
             <Route path='pricing' element={<HostCamperPricing />}/>
             <Route path='photos' element={<HostCamperPhotos />}/>
           </Route>
-          
         </Route >
+        <Route path='*' element={<NotFound />}/>
       </Route>
     </Routes>
   );

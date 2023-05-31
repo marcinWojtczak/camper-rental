@@ -5,6 +5,7 @@ const Campers = () => {
   
   const [campers, setCampers] = useState([])
   const [searchParams, setSearchParams] = useSearchParams()
+  console.log(searchParams)
   
   
   const typeFilter = searchParams.get('type')
@@ -28,7 +29,8 @@ const Campers = () => {
   const camperElements = filterCampers?.map((camper, index) => (
     <Link 
       to={camper.id}
-      state={{ search: `?${searchParams.toString()}` }}
+      state={{ 
+        search: `?${searchParams.toString()}`, type: typeFilter }}
     >
       <div 
         key={camper.id} 

@@ -5,8 +5,8 @@ const CamperDetail = () => {
 
   const params = useParams()
   const location = useLocation()
-  console.log(location.state.search)
   const [camper, setCamper] = useState(null)
+  console.log(location)
 
   const btnColor = () => { 
     if(camper?.type === 'simple') {
@@ -19,7 +19,8 @@ const CamperDetail = () => {
   }
 
   const search = location.state?.search || ""
-
+  const type = location.state?.type || "all"
+  
   useEffect(() => {
     fetch(`/api/campers/${params.id}`)
       .then(res =>  res.json())
@@ -32,7 +33,7 @@ const CamperDetail = () => {
       <Link 
         to={`..${search}`}
         relative='path'
-      >&#8592; Back to all campers
+      >&#8592; Back to {type} vans
       </Link>
     {camper
       ? ( <div key={camper.id} className='flex flex-col gap-8'>

@@ -6,8 +6,9 @@ const Campers = () => {
   const [campers, setCampers] = useState([])
   const [searchParams, setSearchParams] = useSearchParams()
   
+  
   const typeFilter = searchParams.get('type')
-  console.log(typeFilter)
+  console.log(searchParams.toString())
   
   //if there is typeFilter
   const filterCampers = typeFilter 
@@ -24,17 +25,15 @@ const Campers = () => {
     }
   })
 
-
-  useEffect(() => {
-    fetch("/api/campers")
-      .then(res => res.json())
-      .then(data => setCampers(data.vans))
-  }, [])
-
-
   const camperElements = filterCampers?.map((camper, index) => (
-    <Link to={`/campers/${camper.id}`}>
-      <div key={camper.id} className='flex flex-col gap-2'>
+    <Link 
+      to={camper.id}
+      state={{ search: `?${searchParams.toString()}` }}
+    >
+      <div 
+        key={camper.id} 
+        className='flex flex-col gap-2'
+      >
         <img src={camper.imageUrl} alt='camper img' className='rounded-xl'/>
         <div className='flex flex-col gap-2'>
           <h3 className='font-bold'>{camper.name}</h3>
@@ -44,15 +43,50 @@ const Campers = () => {
       </div>
     </Link>
   ))
+
+  function handleFilterChange(key, value) {
+    setSearchParams(prevParams => {
+      if(value === null) {
+        prevParams.delete(key)
+      } else {
+        prevParams.set(key, value)
+      }
+      return prevParams
+    })
+  }
+
+  useEffect(() => {
+    fetch("/api/campers")
+      .then(res => res.json())
+      .then(data => setCampers(data.vans))
+  }, [])
   
   return (
     <div className='p-4 md:p-16 flex flex-col gap-8'>
       <h1 className='font-bold'>Explore our van options</h1>
       <div className='flex items-center gap-2'>
-        <Link to='?type=simple' className='px-4 py-2 font-semibold bg-[#FEB139] rounded-lg hover:bg-[#FD5E53] hover:text-[white]'>Simple</Link>
-        <Link to='?type=luxury' className='px-4 py-2 font-semibold bg-[#FEB139] rounded-lg hover:bg-emerald-900 hover:text-[white]'>Luxury</Link>
-        <Link to='?type=rugged' className='px-4 py-2 font-semibold bg-[#FEB139] rounded-lg hover:bg-[black] hover:text-[white]'>Rugged</Link>
-        <Link to='.' className='px-4 py-2 font-semibold bg-[#FEB139] rounded-lg hover:bg-[#3e6ccf] hover:text-[white]'>All</Link>
+        <button 
+          onClick={() => handleFilterChange("type", "simple")} 
+          className=
+            {`px-4 py-2 font-semibold bg-[#FEB139] rounded-lg hover:bg-[#ff5100] hover:text-[white] ${typeFilter === 'simple' && 'bg-[#ff5100] text-[white]'}`}>Simple
+        </button>
+        <button 
+          onClick={() => handleFilterChange("type", "luxury")} 
+          className={`px-4 py-2 font-semibold bg-[#FEB139] rounded-lg hover:bg-emerald-900 hover:text-[white] ${typeFilter === 'luxury' && 'bg-emerald-900 text-[white]'}`}>Luxury
+        </button>
+        <button  
+          onClick={() => handleFilterChange("type", "rugged")} 
+          className={`px-4 py-2 font-semibold bg-[#FEB139] rounded-lg hover:bg-[black] hover:text-[white] ${typeFilter === 'rugged' && 'bg-[black] text-[white]'}`}>Rugged
+        </button>
+        
+        { typeFilter &&
+          <button 
+            onClick={() => handleFilterChange("type", null) } 
+            className='px-4 py-2 font-semibold bg-[#FEB139] rounded-lg hover:bg-[#3e6ccf] hover:text-[white]'>Clear Filter
+          </button>
+        }
+        
+        
       </div>
       
       <div className='flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-12'>

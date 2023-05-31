@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams, Link, useLocation } from 'react-router-dom'
 
 const CamperDetail = () => {
 
   const params = useParams()
+  const location = useLocation()
+  console.log(location.state.search)
   const [camper, setCamper] = useState(null)
 
   const btnColor = () => { 
@@ -16,6 +18,8 @@ const CamperDetail = () => {
     }
   }
 
+  const search = location.state?.search || ""
+
   useEffect(() => {
     fetch(`/api/campers/${params.id}`)
       .then(res =>  res.json())
@@ -24,7 +28,12 @@ const CamperDetail = () => {
   
 
   return (
-    <div className="p-8">
+    <div className="p-8 flex flex-col gap-4">
+      <Link 
+        to={`..${search}`}
+        relative='path'
+      >&#8592; Back to all campers
+      </Link>
     {camper
       ? ( <div key={camper.id} className='flex flex-col gap-8'>
             <img src={camper.imageUrl} alt='camper img' className='rounded-xl'/>

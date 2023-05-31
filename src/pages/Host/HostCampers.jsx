@@ -14,7 +14,7 @@ const HostCampers = () => {
 
   const hostCampersElement = campers?.map((camper) => (
     <Link 
-      to={`/host/campers/${camper.id}`}
+      to={camper.id}
       key={camper.id}
     >
       <div className='flex w-full bg-[white] p-7 rounded-xl gap-4'>

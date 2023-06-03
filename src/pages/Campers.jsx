@@ -1,20 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import { Link, useSearchParams} from 'react-router-dom';
+import { Link, useSearchParams, useLoaderData} from 'react-router-dom';
 import { getCampers } from '../api';
 
+export function loader() {
+  return getCampers()
+}
 
 const Campers = () => {
-  
-  const [campers, setCampers] = useState([])
   const [searchParams, setSearchParams] = useSearchParams()
-  const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-
-  
+  const campers = useLoaderData()
   
   const typeFilter = searchParams.get('type')
-  console.log(searchParams.toString())
-  
+
   //if there is typeFilter
   const filterCampers = typeFilter 
     ? campers.filter(camper => camper.type === typeFilter)
@@ -29,26 +27,6 @@ const Campers = () => {
       return "bg-[black]"
     }
   })
-
-  useEffect(() => {
-    async function loadCampers() {
-      setLoading(true)
-      try {
-        const data = await getCampers()
-        setCampers(data)
-      } catch(err) {
-        setError(err)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    loadCampers()
-  },[])
-
-  if(loading) {
-    return <h1>Loading...</h1>
-  }
 
   if(error) {
     return <h1>There was an error: {error.message}</h1>

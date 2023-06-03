@@ -9,7 +9,7 @@ import HostCamperDetail from './pages/Host/HostCamperDetail';
 import HostCamperInfo from './pages/Host/HostCamperInfo';
 import HostCamperPricing from './pages/Host/HostCamperPricing';
 import HostCamperPhotos from './pages/Host/HostCamperPhotos';
-import Campers from './pages/Campers';
+import Campers, { loader as campersLoader } from './pages/Campers';
 import CamperDetail from './pages/CamperDetail';
 import Layout from './components/Layout';
 import HostLayout from './components/HostLayout';
@@ -19,10 +19,10 @@ import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider} f
 import "./server"
 
 const router = createBrowserRouter(createRoutesFromElements(
-  <Route path='/' element={<Layout/>}>
+  <Route path='/' element={<Layout />}>
     <Route path='/' element={<Home />} />
     <Route path='about' element={<About />} />
-    <Route path='campers' element={<Campers />} />
+    <Route path='campers' element={<Campers />} loader={campersLoader}/>
     <Route path='campers/:id' element={<CamperDetail />} />
     <Route path='host' element={<HostLayout />} >
       <Route index element={<Dashboard />} />

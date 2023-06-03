@@ -1,11 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import { Link, useSearchParams} from 'react-router-dom';
+import { getCampers } from '../api';
+
 
 const Campers = () => {
   
   const [campers, setCampers] = useState([])
   const [searchParams, setSearchParams] = useSearchParams()
-  console.log(searchParams)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+
   
   
   const typeFilter = searchParams.get('type')
@@ -25,6 +29,30 @@ const Campers = () => {
       return "bg-[black]"
     }
   })
+
+  useEffect(() => {
+    async function loadCampers() {
+      setLoading(true)
+      try {
+        const data = await getCampers()
+        setCampers(data)
+      } catch(err) {
+        setError(err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadCampers()
+  },[])
+
+  if(loading) {
+    return <h1>Loading...</h1>
+  }
+
+  if(error) {
+    return <h1>There was an error: {error.message}</h1>
+  }
 
   const camperElements = filterCampers?.map((camper, index) => (
     <Link 
@@ -57,11 +85,6 @@ const Campers = () => {
     })
   }
 
-  useEffect(() => {
-    fetch("/api/campers")
-      .then(res => res.json())
-      .then(data => setCampers(data.vans))
-  }, [])
   
   return (
     <div className='p-4 md:p-16 flex flex-col gap-8'>

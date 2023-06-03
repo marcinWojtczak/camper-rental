@@ -14,32 +14,34 @@ import CamperDetail from './pages/CamperDetail';
 import Layout from './components/Layout';
 import HostLayout from './components/HostLayout';
 import NotFound from './components/NotFound';
-import { Routes, Route } from 'react-router-dom';
+import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider} from 'react-router-dom';
 
 import "./server"
 
+const router = createBrowserRouter(createRoutesFromElements(
+  <Route path='/' element={<Layout/>}>
+    <Route path='/' element={<Home />} />
+    <Route path='about' element={<About />} />
+    <Route path='campers' element={<Campers />} />
+    <Route path='campers/:id' element={<CamperDetail />} />
+    <Route path='host' element={<HostLayout />} >
+      <Route index element={<Dashboard />} />
+      <Route path='income' element={<Income />} />
+      <Route path='reviews' element={<Reviews />} />
+      <Route path='campers' element={<HostCampers />} /> 
+      <Route path='campers/:id' element={<HostCamperDetail />} >
+        <Route index element={<HostCamperInfo />}/>
+        <Route path='pricing' element={<HostCamperPricing />}/>
+        <Route path='photos' element={<HostCamperPhotos />}/>
+      </Route>
+    </Route >
+    <Route path='*' element={<NotFound />}/>
+  </Route>
+))
+
 function App() {
   return (
-    <Routes>
-      <Route path='/' element={<Layout/>}>
-        <Route path='/' element={<Home />} />
-        <Route path='about' element={<About />} />
-        <Route path='campers' element={<Campers />} />
-        <Route path='campers/:id' element={<CamperDetail />} />
-        <Route path='host' element={<HostLayout />} >
-          <Route index element={<Dashboard />} />
-          <Route path='income' element={<Income />} />
-          <Route path='reviews' element={<Reviews />} />
-          <Route path='campers' element={<HostCampers />} /> 
-          <Route path='campers/:id' element={<HostCamperDetail />} >
-            <Route index element={<HostCamperInfo />}/>
-            <Route path='pricing' element={<HostCamperPricing />}/>
-            <Route path='photos' element={<HostCamperPhotos />}/>
-          </Route>
-        </Route >
-        <Route path='*' element={<NotFound />}/>
-      </Route>
-    </Routes>
+    <RouterProvider router={router} />
   );
 }
 

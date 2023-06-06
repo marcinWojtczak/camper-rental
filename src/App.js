@@ -14,15 +14,20 @@ import CamperDetail from './pages/CamperDetail';
 import Layout from './components/Layout';
 import HostLayout from './components/HostLayout';
 import NotFound from './components/NotFound';
+import Error from './components/Error';
 import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider} from 'react-router-dom';
 
 import "./server"
 
 const router = createBrowserRouter(createRoutesFromElements(
-  <Route path='/' element={<Layout />}>
+  <Route path='/' element={<Layout /> } errorElement={<Error />}>
     <Route path='/' element={<Home />} />
     <Route path='about' element={<About />} />
-    <Route path='campers' element={<Campers />} loader={campersLoader}/>
+    <Route 
+      path='campers' 
+      element={<Campers />}
+      loader={campersLoader}
+    />
     <Route path='campers/:id' element={<CamperDetail />} />
     <Route path='host' element={<HostLayout />} >
       <Route index element={<Dashboard />} />
